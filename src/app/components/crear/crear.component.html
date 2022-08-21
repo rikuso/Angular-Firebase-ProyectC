@@ -1,0 +1,440 @@
+<body>
+  <div>
+    <div class="login-box">
+      <h2>Creacion de Carta</h2>
+      <div class="py">
+        <label style="color: #ffff">
+          <input
+            type="radio"
+            class="option-input radio"
+            name="1"
+            value="armaduras"
+            [(ngModel)]="armaduras"
+            (click)="radio(armaduras)"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          armadura
+        </label>
+        <label style="color: #ffff">
+          <input
+            type="radio"
+            class="option-input radio"
+            name="1"
+            value="arma"
+            [(ngModel)]="arma"
+            (click)="radio(arma)"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          arma
+        </label>
+
+        <label style="color: #ffff">
+          <input
+            type="radio"
+            class="option-input radio"
+            name="1"
+            value="habilidad"
+            [(ngModel)]="habilidad"
+            (click)="radio(habilidad)"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          habilidad
+        </label>
+      </div>
+      <!--FORMULARIO DE ARMADURA LISTO-->
+      <form *ngIf="armaduras">
+        <br />
+        <div class="user-box">
+          <input
+            type="text"
+            name=""
+            required=""
+            [(ngModel)]="parte.name"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          />
+          <label>Nombre</label>
+        </div>
+        <label style="color: #ffff">Img</label>
+        <div class="user-box">
+          <input
+            type="file"
+            accept=".png, .jpg, .jpeg"
+            (change)="cargarImagen($event, armaduras)"
+          />
+        </div>
+
+
+        <div class="user-box">
+          <input
+            type="text"
+            name=""
+            required
+            [(ngModel)]="parte.description"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <label>Descripcion</label>
+        </div>
+
+        <label style="color: #ffff">Estilo</label>
+        <div class="select">
+          <select
+            name="tipo"
+            [(ngModel)]="parte.styl"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          >
+            <option value="" selected>Tipo</option>
+            <option value="pesada">pesada</option>
+            <option value="mediana">mediana</option>
+            <option value="ligera">ligera</option>
+          </select>
+        </div>
+
+
+        <label style="color: #ffff">Parte</label>
+        <div class="select">
+          <select
+            name="parte"
+            [(ngModel)]="parte.part"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          >
+            <option value="" selected>Parte</option>
+            <option value="casco">casco</option>
+            <option value="torso">torso</option>
+            <option value="botas">botas</option>
+          </select>
+        </div>
+        <a (click)="guardar()" type="submit"> Guardar</a>
+      </form>
+
+      <!--FORMULARIO DE ARMA-->
+      <form *ngIf="arma">
+        <br />
+        <div class="user-box">
+          <input
+            type="text"
+            name=""
+            required=""
+            [(ngModel)]="armas.name"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <label>Nombre</label>
+        </div>
+
+        <div class="user-box">
+          <input
+            type="text"
+            name=""
+            required=""
+            [(ngModel)]="armas.description"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <label>Descripcion del Arma</label>
+        </div>
+        <label style="color: #ffff">Img</label>
+        <div class="user-box">
+          <input
+            type="file"
+            accept=".png, .jpg, .jpeg"
+            (change)="cargarImagen($event, arma)"
+          />
+        </div>
+        <label style="color: #ffff">Estilo</label>
+
+        <div class="select">
+          <select
+            name="tipo"
+            [(ngModel)]="armas.tipo"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          >
+            <option value="" selected>Tipo</option>
+            <option value="Una Mano">Una Mano</option>
+            <option value="Dos manos">Dos manos</option>
+          </select>
+        </div>
+        <a (click)="guardar()"> Guardar </a>
+      </form>
+      <!--FORMULARIO DE HABILIDAD y POWERS, los powers solo cuenta con 4 carta que tendra 50,100,150,200,pero dejar la opcion desabilitadad
+          para un futuro pero que estaran hay -->
+      <form *ngIf="habilidad">
+        <label>Habilidad o Poder</label>
+        <div class="select">
+          <select
+            name="Habilidad"
+            [(ngModel)]="valorHyP"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          >
+            <option selected>Habilidad o Poder</option>
+            <option value="Habilidad">Habilidad</option>
+            <option value="Poder">Poder</option>
+          </select>
+        </div>
+        <!--Habilidad-->        <br />
+        <div *ngIf="valorHyP == 'Habilidad'">
+
+          <div class="user-box">
+            <input
+              type="text"
+              name=""
+              required=""
+              [(ngModel)]="ability.name"
+              [ngModelOptions]="{ standalone: true }"
+            />
+            <label>Nombre</label>
+          </div>
+          <div class="user-box">
+            <input
+              type="text"
+              name=""
+              required=""
+              [(ngModel)]="ability.description"
+              [ngModelOptions]="{ standalone: true }"
+            />
+            <label>Descripcion</label>
+          </div>
+          <label >Img</label>
+          <div class="user-box">
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              (change)="cargarImagen($event, valorHyP)"
+            />
+          </div>
+          <label>Tipo</label>
+          <div class="select">
+            <select
+              name="daño"
+              [(ngModel)]="valorTipo"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <option value="Una Mano">Una Mano</option>
+              <option value="Dos Manos">Dos Manos</option>
+              <option value="casco">Casco</option>
+              <option value="torso">Torso</option>
+              <option value="botas">Botas</option>
+            </select>
+          </div>
+<!--PROBLEMA CUADRA EL ENVIO DE DATOS, ESTOY ENVIADO TIPO STRING PERO DEBE SER TIPO NUMBER, AHCER UNA REGLA O MIRA COMO MODIFICAR LOS DATOS-->
+          <div *ngIf="valorTipo == 'Una Mano' || valorTipo == 'Dos Manos'">
+            <label>Daño</label>
+            <div class="select">
+              <select name="daño" name="turno" [(ngModel)]="ability.damage"
+              [ngModelOptions]="{ standalone: true }">
+                <option value= 50 *ngIf="valorTipo == 'Una Mano'">50</option>
+                <option value=100 *ngIf="valorTipo == 'Una Mano'">100</option>
+                <option value=150 *ngIf="valorTipo == 'Dos Manos'">150</option>
+                <option value=200 *ngIf="valorTipo == 'Dos Manos'">200</option>
+              </select>
+            </div>
+          </div>
+          <div
+            *ngIf="
+              valorTipo == 'casco' ||
+              valorTipo == 'torso' ||
+              valorTipo == 'botas'
+            "
+          >
+            <label>Defensa</label>
+            <div class="select">
+              <select name="daño" name="turno" [(ngModel)]="ability.defens"
+              [ngModelOptions]="{ standalone: true }">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="150">150</option>
+              </select>
+            </div>
+          </div>
+      
+          <label>Turnos</label>
+          <div class="select">
+            <select name="turno" [(ngModel)]="ability.turn"
+            [ngModelOptions]="{ standalone: true }">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+        </div>
+        <!--esete es el formulario de poder-->
+        <div *ngIf="valorHyP == 'Poder'">
+          <div class="user-box">
+            <input
+              type="text"
+              name=""
+              required=""
+              [(ngModel)]="power.name"
+              [ngModelOptions]="{ standalone: true }"
+            />
+            <label>Nombre</label>
+          </div>
+          <label>Poder</label>
+          <div class="select">
+            <select
+              name="poder"
+              id=""
+              [(ngModel)]="power.powers"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <option value="50" selected>50</option>
+              <option value="100">100</option>
+              <option value="150">150</option>
+              <option value="200">200</option>
+            </select>
+          </div>
+
+          <br />
+          <label style="color: #ffff">Img</label>
+          <div class="user-box">
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              (change)="cargarImagen($event, valorHyP)"
+            />
+          </div>
+        </div>
+        <a (click)="guardar()"> Guardar </a>
+      </form>
+    </div>
+  </div>
+  <!--CARTA DE ARMADURA LISTO:FALTA PONER LIMITE DE CARACTER EN LA DESCRIPTION-->
+
+  <div *ngIf="armaduras">
+    <li class="cardTvBlock">
+      <a href="#">
+        <div class="season">
+          <em>DEF</em>
+          <span *ngIf="parte.styl == 'pesada'">150</span>
+          <span *ngIf="parte.styl == 'mediana'">100</span>
+          <span *ngIf="parte.styl == 'ligera'">50</span>
+        </div>
+
+        <div class="Thumb">
+          <img class="tvpost" src="{{ parte.img }}" alt="{{ parte.name }}" />
+        </div>
+
+        <div class="BoxInfo">
+          <div class="BoxTitle">{{ parte.name }}</div>
+          <div class="GenresList">
+            <div>{{ parte.part }}</div>
+          </div>
+          <div class="BoxInfoParagraph">{{ parte.description }}</div>
+        </div>
+        <div class="BlockBar">
+          <div class="Views">
+            <i class="zmdi zmdi-eye"></i> <em>DEFENSA</em>
+            <span *ngIf="parte.styl == 'pesada'">150</span>
+            <span *ngIf="parte.styl == 'mediana'">100</span>
+            <span *ngIf="parte.styl == 'ligera'">50</span>
+          </div>
+          <div class="Reviews">
+            <i class="zmdi zmdi-accounts-alt"></i> <em>Tipo</em>{{ parte.styl }}
+          </div>
+        </div>
+      </a>
+    </li>
+  </div>
+  <!--CARTA DE ARMA  LIMITE DE CARACTER-->
+  <div *ngIf="arma">
+    <li class="cardTvBlock">
+      <a href="#">
+        <div class="season">
+          <em>ATK</em>
+          <span *ngIf="armas.tipo == 'Una Mano'">100</span>
+          <span *ngIf="armas.tipo == 'Dos manos'">50</span>
+        </div>
+        <div class="Thumb">
+          <img class="tvpost" src="{{ armas.img }}" alt="{{ armas.name }}" />
+        </div>
+        <div class="BoxInfo">
+          <div class="BoxTitle">{{ armas.name }}</div>
+          <div class="GenresList">
+            <div>{{ armas.tipo }}</div>
+          </div>
+
+          <div class="BoxInfoParagraph">{{ armas.description }}</div>
+        </div>
+        <div class="BlockBar">
+          <div class="Views">
+            <i class="zmdi zmdi-eye"></i> <em>ATAQUE</em>
+            <span *ngIf="armas.tipo == 'Una Mano'">100</span>
+            <span *ngIf="armas.tipo == 'Dos manos'">50</span>
+          </div>
+        </div>
+      </a>
+    </li>
+  </div>
+
+  <!--CARTA DE HABILIDAD -->
+  <!--DIVIDI LAS DOS CARTA DE PODER Y HABILIDAD, PARA UN MEJOR TRABAJO
+  -->
+  <div *ngIf="habilidad">
+    <div *ngIf="valorHyP == 'Habilidad'">
+      <li class="cardTvBlock">
+        <a href="#">
+          <div class="episodes">
+            
+            <div *ngIf="valorTipo == 'Una Mano' || valorTipo == 'Dos Manos'">
+              <em>Damg</em><span>{{ ability.damage }}</span>
+            </div>
+            <div
+              *ngIf="
+                valorTipo == 'casco' ||
+                valorTipo == 'torso' ||
+                valorTipo == 'botas'
+              "
+            >
+              <em>Defe</em><span>{{ ability.defens }}</span>
+            </div>
+          </div>
+          <div class="imdbRating">
+            <em>Turn</em><span>{{ ability.turn }}</span>
+          </div>
+          <div class="Thumb">
+              <img class="tvpost" src="{{ability.img }}" alt="{{ ability.name }}" />
+          </div>
+          <div class="BoxInfo">
+            <div class="BoxTitle">{{ ability.name }}</div>
+            <div class="GenresList">
+              <div>{{ valorTipo }}</div>
+            </div>
+            <div class="BoxInfoParagraph">{{ ability.description }}</div>
+          </div>
+          <div class="BlockBar">
+            <div class="Views">
+              <i class="zmdi zmdi-eye"></i> <em>Daño</em>{{ ability.damage }}
+            </div>
+            <div class="Reviews">
+              <i class="zmdi zmdi-accounts-alt"></i> <em>Turnos</em
+              >{{ ability.turn }}
+            </div>
+          </div>
+        </a>
+      </li>
+    </div>
+    <!--CARTA DE PODER -->
+    <div *ngIf="valorHyP == 'Poder'">
+      <li class="cardTvBlock">
+        <a href="#">
+          <div class="season">
+            <em>PODER</em><span>{{ power.powers }}</span>
+          </div>
+          <div class="Thumb">
+            <img class="tvpost" src="{{ power.img }}" alt="{{ power.name }}" />
+          </div>
+          <div class="BoxInfo">
+            <div class="BoxTitle">{{ power.name }}</div>
+          </div>
+          <div class="BlockBar">
+            <div class="Views">
+              <i class="zmdi zmdi-eye"></i> <em>PODER</em>{{ power.powers }}
+            </div>
+          </div>
+        </a>
+      </li>
+    </div>
+  </div>
+</body>

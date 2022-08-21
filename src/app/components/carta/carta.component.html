@@ -1,0 +1,59 @@
+<div class="list-choice">
+    <div class="list-choice-title">Carta</div>
+    <div class="list-choice-objects">
+      <label>
+        <input type="radio" name="month"/>                         <span>Armadura</span>
+      </label>
+      <label>
+        <input type="radio" name="month"/>                         <span>Arma</span>
+      </label>
+      <label>
+        <input type="radio" name="month"/>                         <span>Habilidad y Poder</span>
+      </label>
+    </div>
+  </div>
+
+<div class="fondo">
+  <div class="container">
+    <div class="row">
+      <div class="col" *ngFor="let item of cardArmadura">
+        <div>
+          <li class="cardTvBlock">
+            <a href="#">
+              <div class="season">
+                <em>DEF</em>
+                <span>{{ item.armon.defens }}</span>
+              </div>
+
+              <div class="Thumb">
+                <img
+                  class="tvpost"
+                  src="{{ item.armon.img }}"
+                  alt="{{ item.armon.name }}"
+                />
+              </div>
+
+              <div class="BoxInfo">
+                <div class="BoxTitle">{{ item.armon.name }}</div>
+                <div class="GenresList">
+                  <div>{{ item.armon.part }}</div>
+                </div>
+                <div class="BoxInfoParagraph">{{ item.armon.description }}</div>
+              </div>
+              <div class="BlockBar">
+                <div class="Views">
+                  <i class="zmdi zmdi-eye"></i> <em>DEFENSA</em>
+                  <span>{{ item.armon.defens }}</span>
+                </div>
+                <div class="Reviews">
+                  <i class="zmdi zmdi-accounts-alt"></i> <em>Tipo</em
+                  >{{ item.armon.styl }}
+                </div>
+              </div>
+            </a>
+          </li>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
