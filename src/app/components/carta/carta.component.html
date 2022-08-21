@@ -1,21 +1,15 @@
-<div class="list-choice">
-    <div class="list-choice-title">Carta</div>
-    <div class="list-choice-objects">
-      <label>
-        <input type="radio" name="month"/>                         <span>Armadura</span>
-      </label>
-      <label>
-        <input type="radio" name="month"/>                         <span>Arma</span>
-      </label>
-      <label>
-        <input type="radio" name="month"/>                         <span>Habilidad y Poder</span>
-      </label>
-    </div>
-  </div>
+<div>
+  <input type="checkbox" /><label for="">Armadura</label>
+  <input type="checkbox" /><label for="">Arma</label>
+  <input type="checkbox" /><label for="">Habilidad</label>
+  <input type="checkbox" /><label for="">Poder</label>
+</div>
 
 <div class="fondo">
   <div class="container">
     <div class="row">
+      <!--TRAER ALS CARTA DE BASE DE DATOS-->
+      <!--CARTA DE ARMADURA-->
       <div class="col" *ngFor="let item of cardArmadura">
         <div>
           <li class="cardTvBlock">
@@ -48,6 +42,116 @@
                 <div class="Reviews">
                   <i class="zmdi zmdi-accounts-alt"></i> <em>Tipo</em
                   >{{ item.armon.styl }}
+                </div>
+              </div>
+            </a>
+          </li>
+        </div>
+      </div>
+      <!--CARTA DE ARMAS-->
+      <div class="col" *ngFor="let item of cardArmas">
+        <div>
+          <li class="cardTvBlock">
+            <a href="#">
+              <div class="season">
+                <em>ATK</em>
+                <span *ngIf="item.arma.tipo == 'Una Mano'">100</span>
+                <span *ngIf="item.arma.tipo == 'Dos manos'">50</span>
+              </div>
+              <div class="Thumb">
+                <img
+                  class="tvpost"
+                  src="{{ item.arma.img }}"
+                  alt="{{ item.arma.name }}"
+                />
+              </div>
+              <div class="BoxInfo">
+                <div class="BoxTitle">{{ item.arma.name }}</div>
+                <div class="GenresList">
+                  <div>{{ item.arma.tipo }}</div>
+                </div>
+
+                <div class="BoxInfoParagraph">{{ item.arma.description }}</div>
+              </div>
+              <div class="BlockBar">
+                <div class="Views">
+                  <i class="zmdi zmdi-eye"></i> <em>ATAQUE</em>
+                  <span *ngIf="item.arma.tipo == 'Una Mano'">100</span>
+                  <span *ngIf="item.arma.tipo == 'Dos manos'">50</span>
+                </div>
+              </div>
+            </a>
+          </li>
+        </div>
+      </div>
+      <!--CARTA DE HABILIDAD-->
+      <div class="col" *ngFor="let item of cardHabilidad">
+        <div>
+          <li class="cardTvBlock">
+            <a href="#">
+              <div class="episodes">
+                <div *ngIf="item.ability.damage != 0">
+                  <em>Damg</em><span>{{ item.ability.damage }}</span>
+                </div>
+                <div *ngIf="item.ability.defens != 0">
+                  <em>Defe</em><span>{{ item.ability.defens }}</span>
+                </div>
+              </div>
+              <div class="imdbRating">
+                <em>Turn</em><span>{{ item.ability.turn }}</span>
+              </div>
+              <div class="Thumb">
+                <img
+                  class="tvpost"
+                  src="{{ item.ability.img }}"
+                  alt="{{ item.ability.name }}"
+                />
+              </div>
+              <div class="BoxInfo">
+                <div class="BoxTitle">{{ item.ability.name }}</div>
+                <div class="GenresList">
+                  <div>{{ item.ability.tipo }}</div>
+                </div>
+                <div class="BoxInfoParagraph">
+                  {{ item.ability.description }}
+                </div>
+              </div>
+              <div class="BlockBar">
+                <div class="Views">
+                  <i class="zmdi zmdi-eye"></i> <em>Daño</em
+                  >{{ item.ability.damage }}
+                </div>
+                <div class="Reviews">
+                  <i class="zmdi zmdi-accounts-alt"></i> <em>Turnos</em
+                  >{{ item.ability.turn }}
+                </div>
+              </div>
+            </a>
+          </li>
+        </div>
+      </div>
+      <!--CARTA DE PODER-->
+      <div class="col" *ngFor="let item of cardPower">
+        <div>
+          <li class="cardTvBlock">
+            <a href="#">
+              <div class="season">
+                <em>PODER</em><span>{{ item.powers.powers }}</span>
+              </div>
+              <div class="Thumb">
+                <img
+                  class="tvpost"
+                  src="{{ item.powers.img }}"
+                  alt="{{ item.powers.name }}"
+                />
+              </div>
+              <div class="BoxInfo">
+                <div class="BoxTitle">{{ item.powers.name }}</div>
+              </div>
+              <div class="BlockBar">
+                <div class="Views">
+                  <i class="zmdi zmdi-eye"></i> <em>PODER</em
+                  >{{ item.powers.powers }}
                 </div>
               </div>
             </a>

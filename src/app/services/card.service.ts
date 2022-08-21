@@ -1,56 +1,92 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, Firestore,collectionData } from '@angular/fire/firestore';
+import {
+  addDoc,
+  collection,
+  Firestore,
+  collectionData,
+} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { CardAbility, CardArmon, CardPowers, CardWeapon, ClassPersonaje, Mazo, Type, User } from '../interfaces/cards';
+import {
+  CardAbility,
+  CardArmon,
+  CardPowers,
+  CardWeapon,
+  ClassPersonaje,
+  Mazo,
+  Type,
+  User,
+} from '../interfaces/cards';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CardService {
-
-  constructor(private firestore : Firestore) { }
-//USUARIOS
-  addUser(user :User){
+  constructor(private firestore: Firestore) {}
+  //USUARIOS
+  addUser(user: User) {
     const userRef = collection(this.firestore, 'Usuario');
-    return addDoc(userRef,user)
+    return addDoc(userRef, user);
   }
-//MAZO
-  addMazo(mazo :Mazo){
+  //MAZO
+  addMazo(mazo: Mazo) {
     const mazoRef = collection(this.firestore, 'Mazo');
-    return addDoc(mazoRef,mazo)
+    return addDoc(mazoRef, mazo);
   }
-// CARTA DE PODER
-  addCardPower(cardPowers : CardPowers){
+  // CARTA DE PODER
+  addCardPower(cardPowers: CardPowers) {
     const cardPowerRef = collection(this.firestore, 'cardPower');
-    return addDoc(cardPowerRef,cardPowers)
+    return addDoc(cardPowerRef, cardPowers);
   }
-// CARTA DE HABILIDAD
-  addCardAbility(cardAbility : CardAbility){
+  //ARMA MOSTRAR
+  getCardPower(): Observable<CardPowers[]> {
+    const cardPowerRef = collection(this.firestore, 'cardPower');
+    return collectionData(cardPowerRef, { idField: 'id' }) as Observable<
+      CardPowers[]
+    >;
+  }
+  // CARTA DE HABILIDAD
+  addCardAbility(cardAbility: CardAbility) {
     const cardAbilityRef = collection(this.firestore, 'cardAbility');
-    return addDoc(cardAbilityRef,cardAbility)
+    return addDoc(cardAbilityRef, cardAbility);
   }
-// ARMADURA  CARTA AGREGAR
-  addCardArmon(cardArmon : CardArmon){
+  //HABILIDAD MOSTRAR
+  getCardAbility(): Observable<CardAbility[]> {
+    const cardAbilityRef = collection(this.firestore, 'cardAbility');
+    return collectionData(cardAbilityRef, { idField: 'id' }) as Observable<
+      CardAbility[]
+    >;
+  }
+  // ARMADURA  CARTA AGREGAR
+  addCardArmon(cardArmon: CardArmon) {
     const cardArmonRef = collection(this.firestore, 'cardArmon');
-    return addDoc(cardArmonRef,cardArmon)
+    return addDoc(cardArmonRef, cardArmon);
   }
-//ARMADURA MOSTRAR
-  getCardArmon():Observable<CardArmon[]>{
+  //ARMADURA MOSTRAR
+  getCardArmon(): Observable<CardArmon[]> {
     const cardArmonRef = collection(this.firestore, 'cardArmon');
-    return collectionData(cardArmonRef,{idField : 'id'} )as Observable<CardArmon[]>;
+    return collectionData(cardArmonRef, { idField: 'id' }) as Observable<
+      CardArmon[]
+    >;
   }
-// ARAMA CARTA
-  addCardWeapon(cardWeapon : CardWeapon){
+  // ARMA CARTA
+  addCardWeapon(cardWeapon: CardWeapon) {
     const cardWeaponRef = collection(this.firestore, 'cardWeapon');
-    return addDoc(cardWeaponRef,cardWeapon)
+    return addDoc(cardWeaponRef, cardWeapon);
   }
-// CLASS Y TIPO
-  addClass(classP : ClassPersonaje){
+  //ARMA MOSTRAR
+  getCardWeapon(): Observable<CardWeapon[]> {
+    const cardWeaponRef = collection(this.firestore, 'cardWeapon');
+    return collectionData(cardWeaponRef, { idField: 'id' }) as Observable<
+      CardWeapon[]
+    >;
+  }
+  // CLASS Y TIPO
+  addClass(classP: ClassPersonaje) {
     const classPRef = collection(this.firestore, 'classP');
-    return addDoc(classPRef,classP)
+    return addDoc(classPRef, classP);
   }
-  addType(type : Type){
+  addType(type: Type) {
     const typeRef = collection(this.firestore, 'type');
-    return addDoc(typeRef,type)
+    return addDoc(typeRef, type);
   }
 }

@@ -6,6 +6,7 @@ import { CardService } from 'src/app/services/card.service';
 import { StorageService } from 'src/app/services/storage.service';
 import {
   Ability,
+  CardAbility,
   CardArmon,
   CardPowers,
   CardWeapon,
@@ -66,7 +67,9 @@ export class CrearComponent implements OnInit {
     defens :0,
     tipo: '',
   };
-
+  cardAbility:CardAbility={
+    ability: this.ability
+  }
   cardPower: CardPowers = {
     powers: this.power,
   };
@@ -154,7 +157,7 @@ ensayo(){
           this.ability.damage= Number(this.ability.damage);
           this.ability.defens = Number(this.ability.defens);
           this.toastr.success(this.ability.name, 'Carta guardad');
-          const response = this.cardService.addCardAbility(this.ability);
+          const response = this.cardService.addCardAbility(this.cardAbility);
           console.log(response);
 
           this.limpiarHP();

@@ -23,11 +23,11 @@ export interface Mazo{
 //interface o BD de la relciond e las cartas poder y habilidad
 export interface CardPowers{
     id ?: number|string,
-    powers ?: Powers
+    powers : Powers
 }
 export interface CardAbility{
     id?  : number|string,
-    ability ?: Ability,
+    ability : Ability,
 }
 export interface Ability{
     id ?: number|string,
