@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { addDoc } from '@firebase/firestore';
 import { ToastrService } from 'ngx-toastr';
+import { type } from 'os';
 import { CardService } from 'src/app/services/card.service';
 import { StorageService } from 'src/app/services/storage.service';
 import {
@@ -78,7 +79,7 @@ export class CrearComponent implements OnInit {
   ngOnInit(): void {}
 ensayo(){
   this.ability.tipo =  this.valorTipo;
-  console.log(this.ability);
+  console.log(this.ability.damage) 
 }
   eleccion(valor: string) {
     switch (valor) {
@@ -149,8 +150,10 @@ ensayo(){
         .then((urlImagen) => {
           this.ability.img = urlImagen;
           //para los mensajes
+          this.ability.tipo =  this.valorTipo;
+          this.ability.damage= Number(this.ability.damage);
+          this.ability.defens = Number(this.ability.defens);
           this.toastr.success(this.ability.name, 'Carta guardad');
-
           const response = this.cardService.addCardAbility(this.ability);
           console.log(response);
 
