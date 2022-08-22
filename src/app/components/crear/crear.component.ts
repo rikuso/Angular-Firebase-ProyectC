@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { addDoc } from '@firebase/firestore';
 import { ToastrService } from 'ngx-toastr';
-import { type } from 'os';
 import { CardService } from 'src/app/services/card.service';
 import { StorageService } from 'src/app/services/storage.service';
 import {
@@ -44,7 +42,7 @@ export class CrearComponent implements OnInit {
     img: '',
     name: '',
     damange: 0,
-    tipo: '',
+    styl: '',
     description: '',
   };
   cardArma: CardWeapon = {
@@ -65,7 +63,7 @@ export class CrearComponent implements OnInit {
     damage: 0,
     turn: 0,
     defens :0,
-    tipo: '',
+    styl: '',
   };
   cardAbility:CardAbility={
     ability: this.ability
@@ -80,11 +78,9 @@ export class CrearComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-ensayo(){
-  this.ability.tipo =  this.valorTipo;
-  console.log(this.ability.damage) 
-}
+
   eleccion(valor: string) {
+    console.log("este es vlaor que llega "+valor)
     switch (valor) {
       case 'pesada':
         this.parte.defens = 150;
@@ -108,7 +104,8 @@ ensayo(){
   async guardar() {
     try {
       //metodo
-      this.eleccion(this.parte.styl || this.armas.tipo);
+      
+      this.eleccion(this.parte.styl || this.armas.styl);
 
       if (this.parte.defens > 49) {
         this.storageService
@@ -153,7 +150,7 @@ ensayo(){
         .then((urlImagen) => {
           this.ability.img = urlImagen;
           //para los mensajes
-          this.ability.tipo =  this.valorTipo;
+          this.ability.styl =  this.valorTipo;
           this.ability.damage= Number(this.ability.damage);
           this.ability.defens = Number(this.ability.defens);
           this.toastr.success(this.ability.name, 'Carta guardad');
@@ -165,7 +162,7 @@ ensayo(){
       } else {
         this.storageService
           .subirImagen(
-            this.armas.tipo,
+            this.armas.styl,
             this.armas.name + '_' + Date.now(),
             this.armas.img
           )
@@ -259,7 +256,7 @@ ensayo(){
       this.armas.img = '',
       this.armas.description = '',
       this.armas.damange = 0,
-      this.armas.tipo = '';
+      this.armas.styl = '';
   }
   limpiarHP() {
     if (this.valorHyP == 'Poder') {
@@ -273,7 +270,7 @@ ensayo(){
         this.ability.name = '',
         this.ability.damage = 0,
         this.ability.defens = 0,
-        this.ability.tipo = '',
+        this.ability.styl = '',
         this.ability.turn = 0,
         this.valorTipo = ''
     }

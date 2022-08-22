@@ -16,6 +16,7 @@ import { JuegoComponent } from './components/juego/juego.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { FiltroPipe } from './pipes/filtro.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { ToastrModule } from 'ngx-toastr';
     CrearComponent,
     MazoComponent,
     CartaComponent,
-    JuegoComponent
+    JuegoComponent,
+    FiltroPipe
   ],
   imports: [
     BrowserModule,

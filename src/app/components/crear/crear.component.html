@@ -146,10 +146,11 @@
         <div class="select">
           <select
             name="tipo"
-            [(ngModel)]="armas.tipo"
+            [(ngModel)]="armas.styl"
             [ngModelOptions]="{ standalone: true }"
             required
           >
+          <h1>{{armas.styl}}</h1>
             <option value="" selected>Tipo</option>
             <option value="Una Mano">Una Mano</option>
             <option value="Dos manos">Dos manos</option>
@@ -343,8 +344,8 @@
       <a href="#">
         <div class="season">
           <em>ATK</em>
-          <span *ngIf="armas.tipo == 'Una Mano'">100</span>
-          <span *ngIf="armas.tipo == 'Dos manos'">50</span>
+          <span *ngIf="armas.styl == 'Una Mano'">100</span>
+          <span *ngIf="armas.styl == 'Dos manos'">50</span>
         </div>
         <div class="Thumb">
           <img class="tvpost" src="{{ armas.img }}" alt="{{ armas.name }}" />
@@ -352,7 +353,7 @@
         <div class="BoxInfo">
           <div class="BoxTitle">{{ armas.name }}</div>
           <div class="GenresList">
-            <div>{{ armas.tipo }}</div>
+            <div>{{ armas.styl }}</div>
           </div>
 
           <div class="BoxInfoParagraph">{{ armas.description }}</div>
@@ -360,8 +361,8 @@
         <div class="BlockBar">
           <div class="Views">
             <i class="zmdi zmdi-eye"></i> <em>ATAQUE</em>
-            <span *ngIf="armas.tipo == 'Una Mano'">100</span>
-            <span *ngIf="armas.tipo == 'Dos manos'">50</span>
+            <span *ngIf="armas.styl == 'Una Mano'">100</span>
+            <span *ngIf="armas.styl == 'Dos manos'">50</span>
           </div>
         </div>
       </a>

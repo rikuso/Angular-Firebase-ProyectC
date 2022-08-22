@@ -1,162 +1,194 @@
-<div>
-  <input type="checkbox" /><label for="">Armadura</label>
-  <input type="checkbox" /><label for="">Arma</label>
-  <input type="checkbox" /><label for="">Habilidad</label>
-  <input type="checkbox" /><label for="">Poder</label>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2">
+      <span class="custom-dropdown big">
+        <select  [(ngModel)]="filtro"
+        [ngModelOptions]="{ standalone: true }"> 
+        <option value="filtro" selected> Filtro</option>    
+            <option value="armadura"> Armadura</option>  
+            <option value="arma"> Arma</option>
+            <option value="habilidad"> Habilidad</option>
+            <option valur="poder">Poder</option>
+        </select>
+      </span>
+    </div>
+    <div class="col-sm-6">
+      <form class="d-flex" role="search">
+        <input
+          [(ngModel)]="busquedas"
+          [ngModelOptions]="{ standalone: true }"
+          class="form-control me-2"
+          type="search"
+          aria-label="Search"
+        />
+        <div>
+          <button class="btn btn-primary" type="button">Guardar</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-sm-2">
+      Mazo GUARDAR
+      <p>CARTAS ARMADURA Y ARMA : {{ cartas.length }}</p>
+    </div>
+  </div>
 </div>
 
-<div class="fondo">
-  <div class="container">
-    <div class="row">
-      <!--TRAER ALS CARTA DE BASE DE DATOS-->
-      <!--CARTA DE ARMADURA-->
-      <div class="col" *ngFor="let item of cardArmadura">
-        <div>
-          <li class="cardTvBlock">
-            <a href="#">
-              <div class="season">
-                <em>DEF</em>
+<div class="container-fluid overflow-hidden">
+  <div class="row row-cols-1 row-cols-lg-3 row-cols-sm-2 row-cols-md-3">
+    <!--TRAER ALS CARTA DE BASE DE DATOS-->
+    <!--CARTA DE ARMADURA-->
+
+    <div class="col" *ngFor="let item of cardArmadura | filtro: busquedas">
+      <div class="p-3 border bg-light" *ngIf="filtro == 'armadura' || filtro =='filtro'">
+        <li class="cardTvBlock">
+          <a (click)="guardar(item.armon)">
+            <div class="season">
+              <em>DEF</em>
+              <span>{{ item.armon.defens }}</span>
+            </div>
+
+            <div class="Thumb">
+              <img
+                class="tvpost"
+                src="{{ item.armon.img }}"
+                alt="{{ item.armon.name }}"
+              />
+            </div>
+
+            <div class="BoxInfo">
+              <div class="BoxTitle">{{ item.armon.name }}</div>
+              <div class="GenresList">
+                <div>{{ item.armon.part }}</div>
+              </div>
+              <div class="BoxInfoParagraph">{{ item.armon.description }}</div>
+            </div>
+            <div class="BlockBar">
+              <div class="Views">
+                <i class="zmdi zmdi-eye"></i> <em>DEFENSA</em>
                 <span>{{ item.armon.defens }}</span>
               </div>
-
-              <div class="Thumb">
-                <img
-                  class="tvpost"
-                  src="{{ item.armon.img }}"
-                  alt="{{ item.armon.name }}"
-                />
+              <div class="Reviews">
+                <i class="zmdi zmdi-accounts-alt"></i> <em>Tipo</em
+                >{{ item.armon.styl }}
               </div>
-
-              <div class="BoxInfo">
-                <div class="BoxTitle">{{ item.armon.name }}</div>
-                <div class="GenresList">
-                  <div>{{ item.armon.part }}</div>
-                </div>
-                <div class="BoxInfoParagraph">{{ item.armon.description }}</div>
-              </div>
-              <div class="BlockBar">
-                <div class="Views">
-                  <i class="zmdi zmdi-eye"></i> <em>DEFENSA</em>
-                  <span>{{ item.armon.defens }}</span>
-                </div>
-                <div class="Reviews">
-                  <i class="zmdi zmdi-accounts-alt"></i> <em>Tipo</em
-                  >{{ item.armon.styl }}
-                </div>
-              </div>
-            </a>
-          </li>
-        </div>
+            </div>
+          </a>
+        </li>
       </div>
-      <!--CARTA DE ARMAS-->
-      <div class="col" *ngFor="let item of cardArmas">
-        <div>
-          <li class="cardTvBlock">
-            <a href="#">
-              <div class="season">
-                <em>ATK</em>
-                <span *ngIf="item.arma.tipo == 'Una Mano'">100</span>
-                <span *ngIf="item.arma.tipo == 'Dos manos'">50</span>
+    </div>
+    <!--CARTA DE ARMAS-->
+    <div class="col" *ngFor="let items of cardArmas | filtro: busquedas">
+      <div class="p-3 border bg-light" *ngIf="filtro == 'arma'|| filtro =='filtro'">
+        <li class="cardTvBlock">
+          <a (click)="guardar(items.arma)">
+            <div class="season">
+              <em>ATK</em>
+              <span *ngIf="items.arma.styl == 'Una Mano'">100</span>
+              <span *ngIf="items.arma.styl == 'Dos manos'">50</span>
+            </div>
+            <div class="Thumb">
+              <img
+                class="tvpost"
+                src="{{ items.arma.img }}"
+                alt="{{ items.arma.name }}"
+              />
+            </div>
+            <div class="BoxInfo">
+              <div class="BoxTitle">{{ items.arma.name }}</div>
+              <div class="GenresList">
+                <div>{{ items.arma.styl }}</div>
               </div>
-              <div class="Thumb">
-                <img
-                  class="tvpost"
-                  src="{{ item.arma.img }}"
-                  alt="{{ item.arma.name }}"
-                />
-              </div>
-              <div class="BoxInfo">
-                <div class="BoxTitle">{{ item.arma.name }}</div>
-                <div class="GenresList">
-                  <div>{{ item.arma.tipo }}</div>
-                </div>
 
-                <div class="BoxInfoParagraph">{{ item.arma.description }}</div>
+              <div class="BoxInfoParagraph">{{ items.arma.description }}</div>
+            </div>
+            <div class="BlockBar">
+              <div class="Views">
+                <i class="zmdi zmdi-eye"></i> <em>ATAQUE</em>
+                <span *ngIf="items.arma.styl == 'Una Mano'">100</span>
+                <span *ngIf="items.arma.styl == 'Dos manos'">50</span>
               </div>
-              <div class="BlockBar">
-                <div class="Views">
-                  <i class="zmdi zmdi-eye"></i> <em>ATAQUE</em>
-                  <span *ngIf="item.arma.tipo == 'Una Mano'">100</span>
-                  <span *ngIf="item.arma.tipo == 'Dos manos'">50</span>
-                </div>
-              </div>
-            </a>
-          </li>
-        </div>
+            </div>
+          </a>
+        </li>
       </div>
-      <!--CARTA DE HABILIDAD-->
-      <div class="col" *ngFor="let item of cardHabilidad">
-        <div>
-          <li class="cardTvBlock">
-            <a href="#">
-              <div class="episodes">
-                <div *ngIf="item.ability.damage != 0">
-                  <em>Damg</em><span>{{ item.ability.damage }}</span>
-                </div>
-                <div *ngIf="item.ability.defens != 0">
-                  <em>Defe</em><span>{{ item.ability.defens }}</span>
-                </div>
+    </div>
+    <!--CARTA DE HABILIDAD-->
+    <div
+      class="col-md-4"
+      *ngFor="let item of cardHabilidad | filtro: busquedas"
+    >
+      <div *ngIf="filtro == 'habilidad'|| filtro =='filtro'">
+        <li class="cardTvBlock">
+          <a href="#">
+            <div class="episodes">
+              <div *ngIf="item.ability.damage != 0">
+                <em>Damg</em><span>{{ item.ability.damage }}</span>
               </div>
-              <div class="imdbRating">
-                <em>Turn</em><span>{{ item.ability.turn }}</span>
+              <div *ngIf="item.ability.defens != 0">
+                <em>Defe</em><span>{{ item.ability.defens }}</span>
               </div>
-              <div class="Thumb">
-                <img
-                  class="tvpost"
-                  src="{{ item.ability.img }}"
-                  alt="{{ item.ability.name }}"
-                />
+            </div>
+            <div class="imdbRating">
+              <em>Turn</em><span>{{ item.ability.turn }}</span>
+            </div>
+            <div class="Thumb">
+              <img
+                class="tvpost"
+                src="{{ item.ability.img }}"
+                alt="{{ item.ability.name }}"
+              />
+            </div>
+            <div class="BoxInfo">
+              <div class="BoxTitle">{{ item.ability.name }}</div>
+              <div class="GenresList">
+                <div>{{ item.ability.tipo }}</div>
               </div>
-              <div class="BoxInfo">
-                <div class="BoxTitle">{{ item.ability.name }}</div>
-                <div class="GenresList">
-                  <div>{{ item.ability.tipo }}</div>
-                </div>
-                <div class="BoxInfoParagraph">
-                  {{ item.ability.description }}
-                </div>
+              <div class="BoxInfoParagraph">
+                {{ item.ability.description }}
               </div>
-              <div class="BlockBar">
-                <div class="Views">
-                  <i class="zmdi zmdi-eye"></i> <em>Daño</em
-                  >{{ item.ability.damage }}
-                </div>
-                <div class="Reviews">
-                  <i class="zmdi zmdi-accounts-alt"></i> <em>Turnos</em
-                  >{{ item.ability.turn }}
-                </div>
+            </div>
+            <div class="BlockBar">
+              <div class="Views">
+                <i class="zmdi zmdi-eye"></i> <em>Daño</em
+                >{{ item.ability.damage }}
               </div>
-            </a>
-          </li>
-        </div>
+              <div class="Reviews">
+                <i class="zmdi zmdi-accounts-alt"></i> <em>Turnos</em
+                >{{ item.ability.turn }}
+              </div>
+            </div>
+          </a>
+        </li>
       </div>
-      <!--CARTA DE PODER-->
-      <div class="col" *ngFor="let item of cardPower">
-        <div>
-          <li class="cardTvBlock">
-            <a href="#">
-              <div class="season">
-                <em>PODER</em><span>{{ item.powers.powers }}</span>
+    </div>
+    <!--CARTA DE PODER-->
+    <div class="col-md-4" *ngFor="let item of cardPower | filtro: busquedas">
+      <div *ngIf="filtro == 'Poder'|| filtro =='filtro'">
+        <li class="cardTvBlock">
+          <a href="#">
+            <div class="season">
+              <em>PODER</em><span>{{ item.powers.powers }}</span>
+            </div>
+            <div class="Thumb">
+              <img
+                class="tvpost"
+                src="{{ item.powers.img }}"
+                alt="{{ item.powers.name }}"
+              />
+            </div>
+            <div class="BoxInfo">
+              <div class="BoxTitle">{{ item.powers.name }}</div>
+            </div>
+            <div class="BlockBar">
+              <div class="Views">
+                <i class="zmdi zmdi-eye"></i> <em>PODER</em
+                >{{ item.powers.powers }}
               </div>
-              <div class="Thumb">
-                <img
-                  class="tvpost"
-                  src="{{ item.powers.img }}"
-                  alt="{{ item.powers.name }}"
-                />
-              </div>
-              <div class="BoxInfo">
-                <div class="BoxTitle">{{ item.powers.name }}</div>
-              </div>
-              <div class="BlockBar">
-                <div class="Views">
-                  <i class="zmdi zmdi-eye"></i> <em>PODER</em
-                  >{{ item.powers.powers }}
-                </div>
-              </div>
-            </a>
-          </li>
-        </div>
+            </div>
+          </a>
+        </li>
       </div>
     </div>
   </div>

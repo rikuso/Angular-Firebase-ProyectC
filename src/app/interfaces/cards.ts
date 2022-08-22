@@ -13,11 +13,11 @@ export interface Mazo{
     id ?: number|string,
     name : String,
     active : boolean,
-    cardWeapon : CardWeapon,
-    cardArmon : CardArmon,
-    cardPowers : CardPowers,
-    cardAbility :CardAbility, 
-    classP : ClassPersonaje
+    cardWeapon ?: CardWeapon,
+    cardArmon ?: CardArmon|null|any,
+    cardPowers ?: CardPowers,
+    cardAbility ?:CardAbility, 
+    classP ?: ClassPersonaje
 }
 
 //interface o BD de la relciond e las cartas poder y habilidad
@@ -37,7 +37,7 @@ export interface Ability{
     turn: number,
     defens: number,
     description : string,
-    tipo:string,
+    styl:string,
     
 }
 
@@ -78,7 +78,7 @@ export interface Weapon{
     img : string | ArrayBuffer | null,
     name : string,
     damange : number,
-    tipo : string,
+    styl : string,
     description: string
 }
 //interface de clase de personaje
